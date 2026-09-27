@@ -1,0 +1,14 @@
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+crash.*.log
+
+# Private SSH key
+ec2_key
+*.pem
+
+# Terraform variable files containing secrets
+*.tfvars
+*.tfvars.json
