@@ -61,12 +61,12 @@ resource "aws_instance" "my_ec2" {
   ]
 
   instance_type = "t3.micro"
-  ami           = "ami-0011550b539717e2a"
+  ami = var.ec2_ami
 
-  subnet_id = "subnet-06e5b20132fa8cb5e"
+  subnet_id = var.ec2_subnet_id
 
   root_block_device {
-    volume_size = 15
+    volume_size = var.ec2_storage_size
     volume_type = "gp3"
   }
 
