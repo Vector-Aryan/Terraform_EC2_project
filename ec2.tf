@@ -70,6 +70,8 @@ resource "aws_instance" "my_ec2" {
     volume_type = "gp3"
   }
 
+  user_data = file("install_nginx.sh")
+
   tags = {
     Name = "Demo-EC2"
   }
