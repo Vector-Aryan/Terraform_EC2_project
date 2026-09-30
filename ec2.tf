@@ -54,13 +54,24 @@ resource aws_security_group my_security_group{
 #EC2
 
 resource "aws_instance" "my_ec2" {
+
+  #Meta Arguments
+  for_each = tomap({
+    Demo-EC2-1 = "t3.micro"
+    Demo-EC2-2 = "t3.micro"
+  })
+
+ depends_on = [
+  aws_security_group.my_security_group
+ ]
+
   key_name = aws_key_pair.demo_key.key_name
 
   vpc_security_group_ids = [
     aws_security_group.my_security_group.id
   ]
 
-  instance_type = "t3.micro"
+  instance_type = each.value
   ami = var.ec2_ami
 
   subnet_id = var.ec2_subnet_id
@@ -73,6 +84,6 @@ resource "aws_instance" "my_ec2" {
   user_data = file("install_nginx.sh")
 
   tags = {
-    Name = "Demo-EC2"
+    Name = each.key
   }
 }
